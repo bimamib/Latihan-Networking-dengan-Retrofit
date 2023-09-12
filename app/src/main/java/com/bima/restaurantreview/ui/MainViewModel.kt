@@ -63,7 +63,10 @@ class MainViewModel : ViewModel() {
         _isLoading.value = true
         val client = ApiConfig.getApiService().postReview(RESTAURANT_ID, "Dicoding", review)
         client.enqueue(object : Callback<PostReviewResponse> {
-            override fun onResponse(call: Call<PostReviewResponse>, response: Response<PostReviewResponse>) {
+            override fun onResponse(
+                call: Call<PostReviewResponse>,
+                response: Response<PostReviewResponse>
+            ) {
                 _isLoading.value = false
                 if (response.isSuccessful) {
                     _listReview.value = response.body()?.customerReviews
@@ -71,6 +74,7 @@ class MainViewModel : ViewModel() {
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
             }
+
             override fun onFailure(call: Call<PostReviewResponse>, t: Throwable) {
                 _isLoading.value = false
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
