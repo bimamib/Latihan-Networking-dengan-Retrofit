@@ -73,6 +73,7 @@ class MainViewModel : ViewModel() {
                 _isLoading.value = false
                 if (response.isSuccessful) {
                     _listReview.value = response.body()?.customerReviews
+                    _snackbarText.value = response.body()?.message
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
