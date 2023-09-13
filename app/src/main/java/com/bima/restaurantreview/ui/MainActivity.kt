@@ -16,6 +16,7 @@ import com.bima.restaurantreview.data.response.RestaurantResponse
 import com.bima.restaurantreview.data.retrofit.ApiConfig
 import com.bima.restaurantreview.databinding.ActivityMainBinding
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,6 +55,10 @@ class MainActivity : AppCompatActivity() {
         }
 
 //        findRestaurant()
+
+        mainViewModel.snackbarText.observe(this) {
+            Snackbar.make(window.decorView.rootView, it, Snackbar.LENGTH_SHORT).show()
+        }
 
         binding.btnSend.setOnClickListener { view ->
             mainViewModel.postReview(binding.edReview.text.toString())
