@@ -37,7 +37,10 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.show()
 
-        val mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
+        val mainViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        ).get(MainViewModel::class.java)
         mainViewModel.restaurant.observe(this) { restaurant ->
             setRestaurantData(restaurant)
         }
@@ -57,7 +60,9 @@ class MainActivity : AppCompatActivity() {
 //        findRestaurant()
 
         mainViewModel.snackbarText.observe(this) {
-            Snackbar.make(window.decorView.rootView, it, Snackbar.LENGTH_SHORT).show()
+            it.getContentIfNotHandled()?.let { snakBarText ->
+                Snackbar.make(window.decorView.rootView, snakBarText, Snackbar.LENGTH_SHORT).show()
+            }
         }
 
         binding.btnSend.setOnClickListener { view ->
