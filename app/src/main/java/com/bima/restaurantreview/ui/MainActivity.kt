@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.show()
+        supportActionBar?.hide()
 
         /*val mainViewModel = ViewModelProvider(
             this,
